@@ -6,5 +6,5 @@ Advent of Code is an Advent calendar of small programming puzzles for a variety 
 
 This is a brand new thing for me. While I knew about this, I have never participated. This year is the first year I took the challenge. 
 
-[Advent of Code: 2021](./2021/ReadMe.md)
+[Advent of Code: 2021](./2021/README.md)
 
