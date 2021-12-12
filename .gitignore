@@ -39,6 +39,7 @@ _ReSharper*/
 
 # Python environments
 venv/
+__pycache__/
 
 # NuGet Packages
 *.nupkg
