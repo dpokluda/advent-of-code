@@ -1,26 +1,18 @@
-def get_command_value(line):
-    index = line.find(" ")
-    return int(line[index+1:])
-
-
 def run():
-    file = open('input.txt', 'r')
-    lines = file.readlines()
+    lines = [x.strip().split(' ') for x in open('input.txt', 'r').readlines()]
+
     horizontal = 0
     vertical = 0
     aim = 0
     for line in lines:
-        value = get_command_value(line)
-        if "forward" in line:
-            horizontal += value
-            vertical += (aim * value)
-        elif "down" in line:
-            aim += value
-        elif "up" in line:
-            aim -= value
+        if line[0] == 'forward':
+            horizontal += int(line[1])
+            vertical += (aim* int(line[1]))
+        elif line[0] == 'down':
+            aim += int(line[1])
+        elif line[0] == 'up':
+            aim -= int(line[1])
         else:
-            print(f"Unknown command: {line}")
+            raise Exception(f'Unknown command: {line[0]}')
 
-    # print(f"Horizontal position: {horizontal}")
-    # print(f"Vertical position: {vertical}")
     print(horizontal * vertical)

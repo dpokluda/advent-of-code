@@ -1,6 +1,5 @@
 def run():
-    file = open('input.txt', 'r')
-    lines = file.readlines()
+    lines = [x.strip() for x in open('input.txt', 'r').readlines()]
 
     # load coordinates
     numbers = []
@@ -12,12 +11,7 @@ def run():
     number_of_cols = max(n[1] for n in numbers) + 1
 
     # create empty map
-    map = []
-    for r in range(0, number_of_rows):
-        row = []
-        for c in range(0, number_of_cols):
-            row.append(0);
-        map.append(list(row))
+    map = [[0 for x in range(0, number_of_cols)] for y in range(0, number_of_rows)]
 
     # draw lines
     for index in range(0, len(numbers) // 2):

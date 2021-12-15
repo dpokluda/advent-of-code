@@ -1,13 +1,10 @@
 def run():
-    file = open('input.txt', 'r')
-    data = file.readlines()
-    previous = None
+    lines = [x.strip() for x in open('input.txt', 'r').readlines()]
+    data = [int(x) for x in lines]
+
     count = 0
-    for value in data:
-        int_value = int(value)
-        if int_value > 0:
-            # print(int_value)
-            if previous is not None and previous < int_value:
-                count += 1
-            previous = int_value
+    for index in range(0, len(data)-1):
+        if data[index+1] > data[index]:
+            count += 1
+
     print(count)

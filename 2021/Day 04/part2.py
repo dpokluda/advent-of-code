@@ -2,7 +2,6 @@ class Board:
     def __init__(self, numbers):
         self.numbers = numbers
         self._marked = []
-        line = []
         for _ in numbers:
             line = []
             for __ in numbers:
@@ -62,8 +61,7 @@ class Board:
 
 
 def run():
-    file = open('input.txt', 'r')
-    lines = file.readlines()
+    lines = [x.strip() for x in open('input.txt', 'r').readlines()]
     numbers = [int(x) for x in lines[0].split(",")]
 
     boards = []
@@ -71,13 +69,12 @@ def run():
     for index in range(1, 1 + (len(lines) - 1) // 6):
         board_numbers = []
         for row in range(1, 6):
-            row_numbers = [int(x) for x in lines[1 + (index-1) * 6 + row][:-1].lstrip().split()]
+            row_numbers = [int(x) for x in lines[1 + (index-1) * 6 + row].lstrip().split()]
             board_numbers.append(list(row_numbers))
         boards += [Board(board_numbers)]
         finished.append(False)
 
     for number in numbers:
-        # print(number)
         for board_number in range(0, len(boards)):
             board = boards[board_number]
             board.mark(number)
@@ -90,15 +87,10 @@ def run():
                         all_finished = False
 
                 if all_finished:
-                    # print(board.numbers)
-                    # print(board._marked)
-                    # print(r)
                     a = board.get_available_numbers()
-                    # print(a)
                     sum = 0
                     for x in a:
                         sum += x
-                    # print(sum)
                     print(number * sum)
                     exit(0)
-    print(":-(")
+    raise Exception("No winning board")

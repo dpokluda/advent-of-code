@@ -2,7 +2,6 @@ class Board:
     def __init__(self, numbers):
         self.numbers = numbers
         self._marked = []
-        line = []
         for _ in numbers:
             line = []
             for __ in numbers:
@@ -42,7 +41,7 @@ class Board:
                     is_winning = False
                     break
             if is_winning:
-                print(f"row:{row}")
+                # print(f"row:{row}")
                 return row
         return -1
 
@@ -56,21 +55,20 @@ class Board:
                     is_winning = False
                     break
             if is_winning:
-                print(f"col:{col}")
+                # print(f"col:{col}")
                 return col
         return -1
 
 
 def run():
-    file = open('input.txt', 'r')
-    lines = file.readlines()
+    lines = [x.strip() for x in open('input.txt', 'r').readlines()]
     numbers = [int(x) for x in lines[0].split(",")]
 
     boards = []
     for index in range(1, 1 + (len(lines) - 1) // 6):
         board_numbers = []
         for row in range(1, 6):
-            row_numbers = [int(x) for x in lines[1 + (index-1) * 6 + row][:-1].lstrip().split()]
+            row_numbers = [int(x) for x in lines[1 + (index-1) * 6 + row].lstrip().split()]
             board_numbers.append(list(row_numbers))
         boards += [Board(board_numbers)]
 
@@ -80,15 +78,10 @@ def run():
             board.mark(number)
             r = board.is_winning()
             if r is not None:
-                # print(board.numbers)
-                # print(board._marked)
-                # print(r)
                 a = board.get_available_numbers()
-                # print(a)
                 sum = 0
                 for x in a:
                     sum += x
-                # print(sum)
                 print(number * sum)
                 exit(0)
-    print(":-(")
+    raise Exception("No winning board.")
