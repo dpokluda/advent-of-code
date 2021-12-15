@@ -1,6 +1,3 @@
-cached_counts = {}
-
-
 def run():
     lines = [x.strip() for x in open('input.txt', 'r').readlines()]
     simple_digits = 0

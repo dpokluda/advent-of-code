@@ -5,7 +5,7 @@ def run():
         fishes.append([number, 0])
     print(fishes)
 
-    number_of_days = 256
+    number_of_days = 80
 
     for day in range(1, number_of_days + 1):
         if day % 10 == 0:

@@ -1,6 +1,4 @@
 # parse points
-import operator
-
 lines = [x.strip() for x in open('points.txt', 'r').readlines()]
 points = [list(map(int, line.split(','))) for line in lines]
 
