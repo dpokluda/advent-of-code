@@ -1,3 +1,5 @@
+from collections import defaultdict
+
 # empty
 d = {}
 print(d)
@@ -24,3 +26,8 @@ for _, key in enumerate(d):
 # clone
 c = d.copy()
 print(c)
+
+# defaultdict
+dd = defaultdict(int)
+dd['a'] += 1
+print(dict(dd))

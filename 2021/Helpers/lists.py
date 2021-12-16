@@ -26,11 +26,13 @@ print(l)
 l.reverse()
 print(l)
 
-# sublists
+# slicing
 print('first two:', l[:2])
 print('all but last two:', l[:-2])
 print('last two:', l[-2:])
 print('all but first two:', l[2:])
+print('every second:', l[::2])
+print('reversed:', l[::-1])
 
 # cloning list
 c = l[:]
