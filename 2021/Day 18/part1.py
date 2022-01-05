@@ -16,16 +16,6 @@ def is_char(line, index, char):
     return result
 
 
-def is_valid(line):
-    level = 0
-    for index in range(len(line)):
-        if is_char(line, index, '['):
-            level += 1
-        elif is_char(line, index, ']'):
-            level -= 1
-    return level == 0
-
-
 def is_simple_number(line, index):
     next_index = index
     if is_char(line, next_index, '['):
@@ -58,24 +48,21 @@ def make_number(line, index):
 def reduce_number(line):
     do_repeat = True
     while do_repeat:
-        if is_valid(line) is False:
-            print('invalid: ', line)
-
         do_repeat = False
         new_line = explode_number(line)
         if new_line is not None:
             do_repeat = True
             line = new_line
-            print('explode:', line)
+            # print('explode:', line)
             continue
 
         new_line = split_number(line)
         if new_line is not None:
             do_repeat = True
             line = new_line
-            print('split:', line)
+            # print('split:', line)
 
-    print('final:', line)
+    # print('final:', line)
     return line
 
 
@@ -165,32 +152,16 @@ def split_number(line):
     return None
 
 
-def calculate_magnitute(number):
+def calculate_magnitude(number):
     left, right = number
     if type(left) is list:
-        left = calculate_magnitute(left)
+        left = calculate_magnitude(left)
     if type(right) is list:
-        right = calculate_magnitute(right)
+        right = calculate_magnitude(right)
     return left*3 + right*2
 
 
-def assert_equal(expected, actual):
-    if expected == actual:
-        print(f"Pass: {actual}")
-    else:
-        print(f"Fail: {actual} != {expected}")
-
-
 def run():
-    # assert_equal('[[[[0,9],2],3],4]', explode_number('[[[[[9,8],1],2],3],4]'))
-    # assert_equal('[7,[6,[5,[7,0]]]]', explode_number('[7,[6,[5,[4,[3,2]]]]]'))
-    # assert_equal('[[6,[5,[7,0]]],3]', explode_number('[[6,[5,[4,[3,2]]]],1]'))
-    # assert_equal('[[3,[2,[8,0]]],[9,[5,[4,[3,2]]]]]', explode_number('[[3,[2,[1,[7,3]]]],[6,[5,[4,[3,2]]]]]'))
-    # assert_equal('[[3,[2,[8,0]]],[9,[5,[7,0]]]]', explode_number('[[3,[2,[8,0]]],[9,[5,[4,[3,2]]]]]'))
-    #
-    # assert_equal('[1,[2,[3,[9,0],[9,4]]]]', explode_number('[1,[2,[3,[4,[5,5]],[4,4]]]]'))
-    # assert_equal('[[[[4,9],[0,9],3],2],1]', explode_number('[[[[4,4],[[5,5],4],3],2],1]'))
-
     lines = [x.strip() for x in open('input.txt', 'r').readlines()]
     line = None
     for input_line in lines:
@@ -203,11 +174,4 @@ def run():
     line = reduce_number(line)
     number = make_number(line, 0)
     print(number)
-
-    # print(calculate_magnitute([[1,2],[[3,4],5]]))
-    # print(calculate_magnitute([[[[0,7],4],[[7,8],[6,0]]],[8,1]]))
-    # print(calculate_magnitute([[[[1,1],[2,2]],[3,3]],[4,4]]))
-    # print(calculate_magnitute([[[[3,0],[5,3]],[4,4]],[5,5]]))
-    # print(calculate_magnitute([[[[5,0],[7,4]],[5,5]],[6,6]]))
-    # print(calculate_magnitute([[[[8,7],[7,7]],[[8,6],[7,7]]],[[[0,7],[6,6]],[8,7]]]))
-    print(calculate_magnitute(number[0]))
+    print(calculate_magnitude(number[0]))
